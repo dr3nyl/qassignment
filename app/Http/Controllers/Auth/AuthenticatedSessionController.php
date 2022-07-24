@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use App\Services\AuthApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,11 +27,15 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
+    public function store()
     {
-        $request->authenticate();
+        //$request->authenticate();
+        $token = (new AuthApi(request('email'), request('password')))->getToken();
 
-        $request->session()->regenerate();
+        request()->session()->put('token', $token->token_key);
+        request()->session()->put('firstname', $token->user->first_name);
+        request()->session()->put('lastname', $token->user->last_name);
+        request()->session()->put('email', $token->user->email);
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
