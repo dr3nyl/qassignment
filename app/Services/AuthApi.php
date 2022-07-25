@@ -20,7 +20,7 @@ class AuthApi
         $response = Http::withOptions([
             'verify' => false
             ])
-            ->post(env('QSYMFONY_ENDPOINT').'/token', [
+            ->post('https://symfony-skeleton.q-tests.com/api/v2/token', [
     
             'email' => $this->username,
             'password' => $this->password
