@@ -15,16 +15,10 @@ class AuthApi
         $this->password = $password;
     }
 
-    public function getToken(){
+    public function authenticate(){
 
         $response = Http::withOptions([
-            'verify' => false,
-            
-            'headers'=> [
-                'Content-Type' => 'application/json',
-                'Accept-Encoding' => 'gzip, deflate, br',
-                'Connection' => 'keep-alive'
-            ]
+            'verify' => false
             ])
             ->post(env('QSYMFONY_ENDPOINT').'/token', [
     
@@ -32,6 +26,14 @@ class AuthApi
             'password' => $this->password
         ]);
 
-        return json_decode($response);
+        $this->credentialSession(json_decode($response));
+    }
+
+    private function credentialSession($response)
+    {
+        request()->session()->put('token', $response->token_key);
+        request()->session()->put('firstname', $response->user->first_name);
+        request()->session()->put('lastname', $response->user->last_name);
+        request()->session()->put('email', $response->user->email);
     }
 }

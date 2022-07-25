@@ -29,13 +29,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function store()
     {
-        //$request->authenticate();
-        $token = (new AuthApi(request('email'), request('password')))->getToken();
-
-        request()->session()->put('token', $token->token_key);
-        request()->session()->put('firstname', $token->user->first_name);
-        request()->session()->put('lastname', $token->user->last_name);
-        request()->session()->put('email', $token->user->email);
+        (new AuthApi(request('email'), request('password')))->authenticate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
