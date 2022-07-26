@@ -19,7 +19,12 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dashboard', [AuthorController::class, 'index'])->middleware(['token.auth'])->name('dashboard');
-Route::delete('/author/{id}', [AuthorController::class, 'destroy'])->middleware(['token.auth']);
+Route::group(['middleware' => 'token.auth'], function(){
+
+    Route::get('/dashboard', [AuthorController::class, 'index'])->name('dashboard');
+    Route::get('/author/{id}', [AuthorController::class, 'show']);
+    Route::delete('/author/{id}', [AuthorController::class, 'destroy']);
+});
+
 
 require __DIR__.'/auth.php';

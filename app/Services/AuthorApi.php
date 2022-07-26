@@ -21,15 +21,17 @@ class AuthorApi
                 'page' => 1
 
         ]);
+
         $authors = json_decode($response)->items;
-       // ddd($this->getSingleAuthor($authors));
+
         return $authors;
 
     }
 
-    public function authorHasBooks($id)
+    public function getAuthor($id)
     {
-       
+        $data = [];
+
         $response = Http::withOptions([
             'verify' => false,
             'headers' => [
@@ -37,9 +39,18 @@ class AuthorApi
                 ]
             ])->get('https://symfony-skeleton.q-tests.com/api/v2/authors/'. $id);
 
-        
-        return sizeof(json_decode($response)->books) ? 1 : 0;
+        $data['details'] = json_decode($response);
+        $data['books'] = json_decode($response)->books;
 
+        return $data;
+
+    }
+
+    public function checkAuthorBooks($id)
+    {
+        $authorData = $this->getAuthor($id);
+
+        return sizeof($authorData['books']) ? 1 : 0 ;
     }
 
     public function delete($id)
