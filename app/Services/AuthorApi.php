@@ -53,13 +53,34 @@ class AuthorApi
         return sizeof($authorData['books']) ? 1 : 0 ;
     }
 
-    public function delete($id)
+    public function create($request)
     {
         $response = Http::withOptions([
             'verify' => false,
             'headers' => [
                 'Authorization' => 'Bearer '. session()->get('token')
+            ]
+            ])->post('https://symfony-skeleton.q-tests.com/api/v2/authors', [
+    
+                "first_name" => $request['first_name'],
+                "last_name" => $request['last_name'],
+                "birthday" => $request['birthday'],
+                "biography" => $request['biography'],
+                "gender" => $request['gender'],
+                "place_of_birth" => $request['place_of_birth']
+
+        ]);
+
+        return !empty(json_decode($response)->id) ? 1 : 0;
+    }
+
+    public function delete($id)
+    {
+        Http::withOptions([
+            'verify' => false,
+            'headers' => [
+                'Authorization' => 'Bearer '. session()->get('token')
                 ]
-            ])->delete('https://symfony-skeleton.q-tests.com/api/v2/authors/'. $id);
+        ])->delete('https://symfony-skeleton.q-tests.com/api/v2/authors/'. $id);
     }
 }

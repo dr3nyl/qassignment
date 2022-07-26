@@ -23,6 +23,8 @@ Route::get('/', function () {
 Route::group(['middleware' => 'token.auth'], function(){
 
     Route::get('/dashboard', [AuthorController::class, 'index'])->name('dashboard');
+    Route::get('/author', [AuthorController::class, 'create']);
+    Route::post('/author', [AuthorController::class, 'store']);
     Route::get('/author/{id}', [AuthorController::class, 'show']);
     Route::delete('/author/{id}', [AuthorController::class, 'destroy']);
 

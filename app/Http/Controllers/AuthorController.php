@@ -31,6 +31,29 @@ class AuthorController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('author.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store()
+    {
+        if ($this->authorApi->create(request())) {
+            return redirect('/dashboard')->with('success', 'Author Created!');
+        }
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -61,7 +84,6 @@ class AuthorController extends Controller
 
             return redirect()->back()->with('success', 'Author deleted!');
         }
-
             return redirect()->back()->with('error', 'Oops! Cannot delete author with books!');
     }
     
