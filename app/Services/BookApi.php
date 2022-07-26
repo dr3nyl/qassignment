@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+use App\Traits\ApiTrait;
 use Illuminate\Support\Facades\Http;
 
 class BookApi
 {
+    use ApiTrait;
+    
     public function getBooks(){
 
         $response = Http::withOptions([
@@ -14,7 +17,7 @@ class BookApi
                 'Authorization' => 'Bearer '. session()->get('token')
             ]
             ])
-            ->get('https://symfony-skeleton.q-tests.com/api/v2/books', [
+            ->get($this->endpoint.'books', [
     
             'orderBy' => 'id',
             'direction' => 'ASC',
@@ -34,6 +37,6 @@ class BookApi
             'headers' => [
                 'Authorization' => 'Bearer '. session()->get('token')
                 ]
-            ])->delete('https://symfony-skeleton.q-tests.com/api/v2/books/'. $id);
+            ])->delete($this->endpoint.'books/'. $id);
     }
 }

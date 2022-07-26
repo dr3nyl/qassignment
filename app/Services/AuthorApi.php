@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+use App\Traits\ApiTrait;
 use Illuminate\Support\Facades\Http;
 
 class AuthorApi
 {
+    use ApiTrait;
+
     public function getAuthors(){
 
         $response = Http::withOptions([
@@ -13,7 +16,7 @@ class AuthorApi
             'headers' => [
                 'Authorization' => 'Bearer '. session()->get('token')
             ]
-            ])->get('https://symfony-skeleton.q-tests.com/api/v2/authors', [
+            ])->get($this->endpoint.'authors', [
     
                 'orderBy' => 'id',
                 'direction' => 'ASC',
@@ -37,7 +40,7 @@ class AuthorApi
             'headers' => [
                 'Authorization' => 'Bearer '. session()->get('token')
                 ]
-            ])->get('https://symfony-skeleton.q-tests.com/api/v2/authors/'. $id);
+            ])->get($this->endpoint.'authors/'. $id);
 
         $data['details'] = json_decode($response);
         $data['books'] = json_decode($response)->books;
@@ -60,7 +63,7 @@ class AuthorApi
             'headers' => [
                 'Authorization' => 'Bearer '. session()->get('token')
             ]
-            ])->post('https://symfony-skeleton.q-tests.com/api/v2/authors', [
+            ])->post('authors', [
     
                 "first_name" => $request['first_name'],
                 "last_name" => $request['last_name'],
@@ -81,6 +84,6 @@ class AuthorApi
             'headers' => [
                 'Authorization' => 'Bearer '. session()->get('token')
                 ]
-        ])->delete('https://symfony-skeleton.q-tests.com/api/v2/authors/'. $id);
+        ])->delete($this->endpoint.'authors/'. $id);
     }
 }
