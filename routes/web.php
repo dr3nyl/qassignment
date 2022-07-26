@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
 Route::get('/dashboard', [AuthorController::class, 'index'])->middleware(['token.auth'])->name('dashboard');
+Route::delete('/author/{id}', [AuthorController::class, 'destroy'])->middleware(['token.auth']);
 
 require __DIR__.'/auth.php';
