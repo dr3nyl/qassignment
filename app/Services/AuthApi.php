@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+use App\Traits\ApiTrait;
 use Illuminate\Support\Facades\Http;
 
 class AuthApi
 {
+    use ApiTrait;
+    
     private $username;
     private $password;
 
@@ -20,7 +23,7 @@ class AuthApi
         $response = Http::withOptions([
             'verify' => false
             ])
-            ->post('https://symfony-skeleton.q-tests.com/api/v2/token', [
+            ->post($this->endpoint.'token', [
     
             'email' => $this->username,
             'password' => $this->password
