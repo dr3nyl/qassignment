@@ -28,7 +28,6 @@ class AuthorController extends Controller
         return view('dashboard', [
             'authors' => $authors
         ]);
-
     }
 
     /**

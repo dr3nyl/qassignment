@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,8 @@ Route::group(['middleware' => 'token.auth'], function(){
     Route::get('/dashboard', [AuthorController::class, 'index'])->name('dashboard');
     Route::get('/author/{id}', [AuthorController::class, 'show']);
     Route::delete('/author/{id}', [AuthorController::class, 'destroy']);
+
+    Route::delete('/book/{id}', [BookController::class, 'destroy']);
 });
 
 

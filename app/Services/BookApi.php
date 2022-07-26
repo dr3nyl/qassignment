@@ -26,4 +26,14 @@ class BookApi
         return json_decode($response)->items;
 
     }
+
+    public function delete($id)
+    {
+        $response = Http::withOptions([
+            'verify' => false,
+            'headers' => [
+                'Authorization' => 'Bearer '. session()->get('token')
+                ]
+            ])->delete('https://symfony-skeleton.q-tests.com/api/v2/books/'. $id);
+    }
 }

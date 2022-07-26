@@ -7,14 +7,6 @@
 
     <div class="py-12">
 
-        @if(session()->has('error'))
-            <div class="flex justify-center mb-2">
-                <div class="bg-red-100 border border-green-400 text-white px-4 py-3 rounded w-xl" role="alert">
-                    <span class="block sm:inline">{{ session('error')}}</span>
-                </div>
-            </div>
-        @endif
-
         @if(session()->has('success'))
             <div class="flex justify-center mb-2">
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded w-xl" role="alert">

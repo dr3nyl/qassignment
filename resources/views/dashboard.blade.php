@@ -47,8 +47,7 @@
                                 <td>{{ $author->place_of_birth }}</td>
                                 <td class="flex justify-center">
                                     <form class="mr-1" action="/author/{{ $author->id }}" method="get">
-                                        @csrf
-                                        <button class="bg-blue-400 px-1 py-1 text-sm rounded-md"><i class="fa fa-pen text-white" aria-hidden="true"></i></button>
+                                        <button class="bg-blue-400 px-1 py-1 text-sm rounded-md"><i class="fas fa-eye" aria-hidden="true"></i></button>
                                     </form>
                                     <form action="/author/{{ $author->id }}" method="post">
                                         @csrf

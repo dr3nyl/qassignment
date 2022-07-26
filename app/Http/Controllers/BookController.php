@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\BookApi;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -79,6 +80,8 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        (new BookApi())->delete($id);
+
+        return redirect()->back()->with('success', 'Book deleted!');
     }
 }
