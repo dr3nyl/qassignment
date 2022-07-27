@@ -22,13 +22,11 @@ class AuthorApi
                 'direction' => 'ASC',
                 'limit' => 50,
                 'page' => 1
-
         ]);
 
         $authors = json_decode($response)->items;
 
         return $authors;
-
     }
 
     public function getAuthor($id)
@@ -46,7 +44,6 @@ class AuthorApi
         $data['books'] = json_decode($response)->books;
 
         return $data;
-
     }
 
     public function checkAuthorBooks($id)
@@ -63,7 +60,7 @@ class AuthorApi
             'headers' => [
                 'Authorization' => 'Bearer '. session()->get('token')
             ]
-            ])->post('authors', [
+            ])->post($this->endpoint.'authors', [
     
                 "first_name" => $request['first_name'],
                 "last_name" => $request['last_name'],
@@ -71,7 +68,6 @@ class AuthorApi
                 "biography" => $request['biography'],
                 "gender" => $request['gender'],
                 "place_of_birth" => $request['place_of_birth']
-
         ]);
 
         return !empty(json_decode($response)->id) ? 1 : 0;
@@ -86,4 +82,5 @@ class AuthorApi
                 ]
         ])->delete($this->endpoint.'authors/'. $id);
     }
+
 }

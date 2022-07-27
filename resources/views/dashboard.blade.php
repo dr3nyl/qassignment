@@ -26,6 +26,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex justify-center mt-4">
+                    <form class="mr-1" action="/book" method="get">
+                        <button class="bg-blue-400 px-2 py-1 rounded-md text-white">Create book</button>
+                    </form>
                     <form action="/author" method="get">
                         <button class="bg-green-400 px-2 py-1 rounded-md text-white">Create author</button>
                     </form>

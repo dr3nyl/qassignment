@@ -28,6 +28,8 @@ Route::group(['middleware' => 'token.auth'], function(){
     Route::get('/author/{id}', [AuthorController::class, 'show']);
     Route::delete('/author/{id}', [AuthorController::class, 'destroy']);
 
+    Route::get('/book', [BookController::class, 'create']);
+    Route::post('/book', [BookController::class, 'store']);
     Route::delete('/book/{id}', [BookController::class, 'destroy']);
 });
 

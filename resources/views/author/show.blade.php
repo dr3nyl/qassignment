@@ -22,6 +22,7 @@
                 </div>
                 <div class="flex justify-center p-6 bg-white border-b border-gray-200">
 
+                @if(!empty($books))
                     <table class="table-auto border">
                         <thead>
                             <tr>
@@ -53,7 +54,11 @@
                             
                         </tbody>
                     </table>
-                    
+                @else
+
+                    <h1>No books for this author</h1>
+
+                @endif
                 </div>
             </div>
         </div>

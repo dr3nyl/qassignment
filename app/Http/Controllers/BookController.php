@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\AuthorApi;
 use App\Services\BookApi;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,11 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $authors = (new AuthorApi())->getAuthors();
+
+        return view('book.create', [
+            'authors' => $authors
+        ]);
     }
 
     /**
@@ -33,9 +38,21 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        // ddd(["author" => [
+        //     "id" => request('author_id')
+        // ],
+        // "title" => request('title'),
+        // "release_date" => request('release_date'),
+        // "description" => request('description'),
+        // "isbn" => request('isbn'),
+        // "format" => request('format'),
+        // "number_of_pages" => request('number_of_pages')]);
+
+        if ((new BookApi())->create(request())) {
+            return redirect('/dashboard')->with('success', 'Book Created!');
+        }
     }
 
     /**
