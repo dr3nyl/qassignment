@@ -7,8 +7,10 @@ This is for the Q exam assessment. I used Laravel with breeze as starterkit, som
 - Clone the project
 - Go to the folder application using cd command on your cmd or terminal
 - Run composer install on your cmd or terminal
+- Run in your terminal: npm install
+- Run in your terminal: npm install
 - Copy .env.example file to .env on the root folder. You can type copy .env.example .env if using command prompt Windows or cp .env.example .env if using terminal, Ubuntu
 - Open your .env file and change the database name (DB_DATABASE) to whatever you have, username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your      configuration.
-- Run php artisan key:generate
-- Run php artisan migrate
-- Run php artisan serve
+- Run in your terminal: php artisan key:generate
+- Run in your terminal: php artisan migrate
+- Run in your terminal: php artisan serve
