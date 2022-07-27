@@ -40,16 +40,6 @@ class BookController extends Controller
      */
     public function store()
     {
-        // ddd(["author" => [
-        //     "id" => request('author_id')
-        // ],
-        // "title" => request('title'),
-        // "release_date" => request('release_date'),
-        // "description" => request('description'),
-        // "isbn" => request('isbn'),
-        // "format" => request('format'),
-        // "number_of_pages" => request('number_of_pages')]);
-
         if ((new BookApi())->create(request())) {
             return redirect('/dashboard')->with('success', 'Book Created!');
         }
