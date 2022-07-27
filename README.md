@@ -14,3 +14,4 @@ This is for the Q exam assessment. I used Laravel with breeze as starterkit, som
 - Run in your terminal: php artisan key:generate
 - Run in your terminal: php artisan migrate
 - Run in your terminal: php artisan serve
+- Then browse the app using your browser(localhost)
